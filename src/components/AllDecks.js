@@ -3,6 +3,7 @@ import {useState, useEffect} from "react"
 
 function AllDecks() {
     const [decksArray, setDecksArray] = useState([])
+    
 
     // Initial fetch to server for decks
     useEffect(() => {
@@ -11,6 +12,8 @@ function AllDecks() {
             .then(function(deckServerData) {
                 setDecksArray(deckServerData)
             })
+
+            console.log("page reloaded")
     }, [])
     // console.log(decksArray)
     const deckCardArray = decksArray.map(function(deck) {
