@@ -12,14 +12,40 @@ code {
     monospace;
 }
 
-a {
+.page {
+  text-align: center;
+}
+
+.page a {
   color: black;
   text-decoration: none;
 }
 
 .header {
+  padding-left: 5px;
+  padding-right: 5px;
   margin-bottom: 40px;
+  background-color: rgb(240, 170, 79);
 }
+
+
+.nav-link {
+  float: right;
+  border: solid;
+  border-width: 1px;
+  padding: 5px;
+  margin: 5px;
+  margin-top: 110px;
+  background-color: rgb(255, 245, 232);
+  color: black;
+  text-decoration: none;
+}
+
+/* .header span {
+  font-size: 40px;
+  color: rgb(255, 245, 232);
+  font-weight: bold;
+} */
 
 #deck-info {
   text-align: center;
@@ -31,7 +57,6 @@ a {
 
 .info-container {
   display: flex;
-  /* margin-top: 40px; */
   margin-bottom: 40px;
   justify-content: center;
 }
@@ -60,6 +85,7 @@ a {
   justify-content: center;
   margin: 10px;
   border: solid;
+  border-width: 2px;
   width: 400px;
 }
 

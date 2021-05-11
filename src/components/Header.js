@@ -3,10 +3,11 @@ import {Link} from "react-router-dom"
 function Header() {
     return (
         <div className="header">
-            <h1>Deck Swap</h1>
-            <Link to="/decks">Decks</Link>
-            <br />
-            <Link to="/newdeck">Add New Deck</Link>
+            <Link to="/">
+            <img src="https://i.imgur.com/USMGLoV.png" alt="logo" style={{ height: "150px" }}/> 
+            </Link>
+            <Link to="/decks" className="nav-link">Decks</Link>
+            <Link to="/newdeck" className="nav-link">Add New Deck</Link>
         </div>
     )
 }
