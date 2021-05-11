@@ -11,3 +11,85 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.page {
+  text-align: center;
+}
+
+.page a {
+  color: black;
+  text-decoration: none;
+}
+
+.header {
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 40px;
+  background-color: rgb(240, 170, 79);
+  height: 100px;
+}
+
+
+.nav-link {
+  float: right;
+  border: solid;
+  border-width: 1px;
+  padding: 5px;
+  margin: 5px;
+  margin-top: 60px;
+  background-color: rgb(255, 245, 232);
+  color: black;
+  text-decoration: none;
+}
+
+/* .header span {
+  font-size: 40px;
+  color: rgb(255, 245, 232);
+  font-weight: bold;
+} */
+
+#deck-info {
+  text-align: center;
+}
+
+.review-card-container {
+  display: flex;
+}
+
+.info-container {
+  display: flex;
+  margin-bottom: 40px;
+  justify-content: center;
+}
+
+.info-box {
+  border: solid;
+  width: 40%;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.review-container {
+  width: 75%;
+  padding: 10px;
+  margin: 10px;
+}
+
+#all-decks-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  border: solid;
+  border-width: 2px;
+  width: 400px;
+}
+
+.card-container img {
+  margin: 5px;
+}
