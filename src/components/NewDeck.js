@@ -6,19 +6,22 @@ function NewDeck() {
     const [newDecklistLink, setNewDecklistLink] = useState("")
     const [newDeckOwner, setNewDeckOwner] = useState("")
     const [newDeckDescription, setNewDeckDescription] = useState("")
-    const [usersArray, setUsersArray] = useState([])
-    // const [fetchSuccessful, setFetchSuccessful] = useState(false)
+    const [ownersArray, setOwnersArray] = useState([])
 
-useEffect(() =>{
-    fetch("http://localhost:9292/users/")
-    .then(res => res.json())
-    .then(res => setUsersArray(res))
-},[])
+    useEffect(() =>{
+        fetch("http://localhost:9292/owners")
+        .then(res => res.json())
+        .then(function(ownersOnServer) {
+            setOwnersArray(ownersOnServer)
+        })
+    },[])
+    console.log(ownersArray)
+
 
     const newDeckObj = {
         name: "", 
-        decklist_link: "",
-        deck_owner: "", 
+        link_url: "",
+        owner_id: "", 
         deck_description: "", 
         img_url: "", 
         commander_id: ""
@@ -38,16 +41,55 @@ useEffect(() =>{
         if (newDeckCommander.includes(" ")){
             splitCommander = newDeckCommander.split(" ").join("+")
 
-        } else { splitCommander = newDeckCommander }
+        } else { 
+            splitCommander = newDeckCommander 
+        }
 
+        ownersArray.forEach(function(owner) {
+            if (owner.name === newDeckOwner) {
+                newDeckObj.owner_id = owner.id
+            } else {
+                fetch("http://localhost:9292/owners", {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(newDeckOwner)
+                })
+                .then(resp => resp.json())
+                .then(function(newOwnerObj) {
+                    newDeckObj.owner_id = newOwnerObj.id
+                    console.log("Post successful")
+                })
+            }
+        })
 
-        // if (newDeckOwner
+        // If the owner already exists, assigning that owner's ID to owner_id
+        // if (ownersArray.filter(function(owner){return owner.name === newDeckObj.name})) {
+        //     let owner = ownersArray.filter(function(owner){return owner.name === newDeckObj.name})
+        //     newDeckObj.owner_id = owner.id
+        // } else {
+        //     fetch("http://localhost:9292/owners", {
+        //         method: "POST",
+        //         headers: {
+        //             "content-type": "application/json"
+        //         },
+        //         body: JSON.stringify(newDeckOwner)
+        //     })
+        //         .then(resp => resp.json())
+        //         .then(function(newOwnerObj) {
+        //             newDeckObj.owner_id = newOwnerObj.id
+        //         })
+        //         console.log("Post request fired")
+        // }
 
         fetch(`https://api.scryfall.com/cards/named?fuzzy=${splitCommander}`)
         .then(resp => resp.json())
         .then(r => {
             scryfallInfo.commander_id = r.id
             scryfallInfo.image_url = r.image_uris.large
+
+
         
             newDeckObj.name = newDeckName
             newDeckObj.link_url = newDecklistLink
@@ -56,7 +98,7 @@ useEffect(() =>{
             newDeckObj.img_url = scryfallInfo.image_url
             newDeckObj.commander_id = scryfallInfo.commander_id
         
-             console.log(newDeckObj)
+            //  console.log(newDeckObj)
         })
 
         
