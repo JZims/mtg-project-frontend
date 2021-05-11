@@ -26,6 +26,7 @@ code {
   padding-right: 5px;
   margin-bottom: 40px;
   background-color: rgb(240, 170, 79);
+  height: 100px;
 }
 
 
@@ -35,7 +36,7 @@ code {
   border-width: 1px;
   padding: 5px;
   margin: 5px;
-  margin-top: 110px;
+  margin-top: 60px;
   background-color: rgb(255, 245, 232);
   color: black;
   text-decoration: none;
