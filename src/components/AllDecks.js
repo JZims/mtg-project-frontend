@@ -12,10 +12,8 @@ function AllDecks() {
             .then(function(deckServerData) {
                 setDecksArray(deckServerData)
             })
-
-            // console.log("page reloaded")
     }, [])
-    // console.log(decksArray)
+
     const deckCardArray = decksArray.map(function(deck) {
         return <DeckCard 
                 key={deck.id}

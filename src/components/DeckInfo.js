@@ -19,6 +19,9 @@ function DeckInfo() {
     }, [params.id])
 
     if (isLoaded) {
+
+        
+
         return (
             <div className="page" id="deck-info">
             <InfoPanel name={deckData.name}
