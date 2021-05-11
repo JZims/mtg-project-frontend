@@ -13,7 +13,7 @@ function AllDecks() {
                 setDecksArray(deckServerData)
             })
 
-            console.log("page reloaded")
+            // console.log("page reloaded")
     }, [])
     // console.log(decksArray)
     const deckCardArray = decksArray.map(function(deck) {
@@ -22,6 +22,8 @@ function AllDecks() {
                 id={deck.id}
                 deckName={deck.name}
                 imgUrl={deck.img_url}
+                checkedOut={deck.checked_out}
+                rentalsArr={deck.rentals}
         />
     })
 
@@ -33,10 +35,6 @@ function AllDecks() {
             </select>
             <div id="all-decks-list">
                 {deckCardArray}
-                {/* <DeckCard />
-                <DeckCard />
-                <DeckCard />
-                <DeckCard /> */}
             </div>
         </div>
     )

@@ -93,3 +93,13 @@ code {
 .card-container img {
   margin: 5px;
 }
+
+#unavail {
+  color:rgb(165, 21, 21);
+  font-weight: bold;
+}
+
+#avail {
+  color:rgb(54, 184, 28);
+  font-weight: bold;
+}
