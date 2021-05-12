@@ -18,7 +18,7 @@ function AllDecks({filteredDeck, newDeck, forceTrigger }) {
     // const arrayWithNewDeck = [...decksArray, newDeck]
     
     const filteredFromDelete = decksArray.filter(deck => deck.id !== filteredDeck)
-
+    console.log(filteredFromDelete)
     const deckCardArray = filteredFromDelete.map(function(deck) {
         return <DeckCard 
                 key={deck.id}

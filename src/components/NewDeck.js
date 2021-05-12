@@ -22,7 +22,7 @@ function NewDeck({setNewDeck}) {
     const newDeckObj = {
         name: "", 
         link_url: "",
-        owner_id: "", 
+        owner_id: 0, 
         deck_bio: "", 
         img_url: "", 
         commander_id: "",
@@ -83,36 +83,32 @@ function NewDeck({setNewDeck}) {
 
             newDeckObj.name = newDeckName
             newDeckObj.link_url = newDecklistLink
-            // newDeckObj.deck_owner = newDeckOwner
+            // newDeckObj.owner.id = newDeckOwner
             newDeckObj.deck_bio = newDeckDescription 
             newDeckObj.img_url = scryfallInfo.image_url
             newDeckObj.commander_id = scryfallInfo.commander_id
 
-            // setScryfallFetchSuccessful(true)
-            // console.log("Scryfall fetch success")
-            console.log(newDeckObj)
+            handleDeckCreation()
+            
+        })
+
+    }
+
+    function handleDeckCreation(){
+
+        console.log(newDeckObj)
+
             fetch("http://localhost:9292/decks", {
                 method: "POST",
                 headers: { "content-type": "application/json" },
                 body: JSON.stringify(newDeckObj)
             })
                 .then(resp => resp.json())
-                .then(function(newDeckObj) {
-                    setNewDeck(newDeckObj)
+                .then(function(returnedDeckObj) {
+                    setNewDeck(returnedDeckObj)
                 })
-        })
-
-        // if (scryfallFetchSuccessful) {
-            //     setScryfallFetchSuccessful(false)
-        // }
-
-        
-        
-    
-    
     }
 
-    // console.log(newDeckObj)
 
     return (
         <div className="page" id="new-deck">
