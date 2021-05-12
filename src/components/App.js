@@ -11,7 +11,7 @@ function App() {
 
   const [filteredDeck, setFilteredDeck]= useState()
   const [newDeck, setNewDeck] = useState({})
-  const [forceTrigger, setForceTrigger] = useState(true)
+  // const [forceTrigger, setForceTrigger] = useState(true)
   
   // function addNewDeck(newDeck) {
   //   setDecksArray([...decksArray, newDeck])
@@ -26,8 +26,9 @@ function App() {
         </Route>
         <Route exact path="/deckinfo/:id">
           <DeckInfo setFilteredDeck={setFilteredDeck}
-                    setForceTrigger={setForceTrigger}
-                    forceTrigger={forceTrigger} />
+                    // setForceTrigger={setForceTrigger}
+                    // forceTrigger={forceTrigger} 
+                    />
         </Route>
         <Route exact path="/newdeck">
           <NewDeck setNewDeck={setNewDeck}/>
@@ -35,7 +36,7 @@ function App() {
         <Route exact path="/decks">
           <AllDecks filteredDeck={filteredDeck}
                     newDeck={newDeck}
-                    forceTrigger={forceTrigger}
+                    // forceTrigger={forceTrigger}
                     />
         </Route>
       </Switch>

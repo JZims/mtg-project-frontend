@@ -2,7 +2,7 @@ import {Button} from 'semantic-ui-react';
 import { useHistory } from "react-router";
 import CheckOut from "./CheckOut";
 
-function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id, setFilteredDeck, owner, setForceTrigger, forceTrigger, getNewRental}) {
+function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id, setFilteredDeck, owner, forceReload}) {
     const history = useHistory()
 
     function average(array) {
@@ -53,7 +53,7 @@ function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id, set
                     <div className="deck-desc">
                         <p>{bio}</p>
                     </div>
-                    {checkedOut ? <button>Check In</button> : <CheckOut setForceTrigger={setForceTrigger} forceTrigger={forceTrigger} id={id} getNewRental={getNewRental}/>}
+                    {checkedOut ? <button>Check In</button> : <CheckOut id={id} forceReload={forceReload}/>}
                     <Button onClick={handleDelete}>Delete Deck</Button>
                 </div>
             </div>

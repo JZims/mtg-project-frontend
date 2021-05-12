@@ -3,10 +3,11 @@ import ReviewCard from "./ReviewCard"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-function DeckInfo({setFilteredDeck, setForceTrigger, forceTrigger}) {
+function DeckInfo({setFilteredDeck}) {
     const [deckData, setDeckData] = useState({})
     const [rentalsArray, setRentalsArray] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
+    const [forceTrigger, setForceTrigger] = useState(true)
     const params = useParams()
     // console.log (params)
     
@@ -17,12 +18,17 @@ function DeckInfo({setFilteredDeck, setForceTrigger, forceTrigger}) {
                 setDeckData(serverDeckData)
                 setRentalsArray(serverDeckData.rentals)
                 setIsLoaded(true)
+                console.log("forceTrigger fired")
             })
-    }, [params.id])
+    }, [params.id, forceTrigger])
 
     // function getNewRental(newRentalServerObj) {
     //     setRentalsArray(...rentalsArray, newRentalServerObj)
     // }
+
+    function forceReload() {
+        setForceTrigger(!forceTrigger)
+    }
 
     if (isLoaded) {
 
@@ -45,8 +51,9 @@ function DeckInfo({setFilteredDeck, setForceTrigger, forceTrigger}) {
                        id={deckData.id}
                        setFilteredDeck={setFilteredDeck}
                        owner={deckData.owner.name}
-                       setForceTrigger={setForceTrigger}
-                       forceTrigger={forceTrigger}
+                       forceReload={forceReload}
+                    //    setForceTrigger={setForceTrigger}
+                    //    forceTrigger={forceTrigger}
                     //    getNewRental={getNewRental}
                        
             />

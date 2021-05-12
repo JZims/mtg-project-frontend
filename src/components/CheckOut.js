@@ -1,11 +1,13 @@
 import { Button, Modal, Form, Label } from 'semantic-ui-react'
 import { useState, useEffect } from 'react'
+// import { useHistory } from "react-router";
 
-function CheckOut({setForceTrigger, forceTrigger, id, getNewRental}) {
+function CheckOut({id, forceReload}) {
     const [open, setOpen] = useState(false)
     const [renter, setRenter] = useState("")
     const [length, setLength] = useState("")
     const [rentersArray, setRentersArray] = useState([])
+    // const history = useHistory()
 
     useEffect(() =>{
         fetch("http://localhost:9292/renters")
@@ -42,37 +44,52 @@ function CheckOut({setForceTrigger, forceTrigger, id, getNewRental}) {
             .then(resp => resp.json())
             .then(function(newRenterObj) {
                 newRental.renter_id = newRenterObj.id
-                setRentersArray([...rentersArray, newRenterObj])
+                fetch("http://localhost:9292/rentals", {
+                        method: "POST",
+                        headers: { "content-type": "application/json" },
+                        body: JSON.stringify(newRental)
+                    })
+                        .then(resp => resp.json())
+                        .then(function(newRentalServerObj) {
+                            fetch("http://localhost:9292/renters")
+                            .then(res => res.json())
+                            .then(function(rentersOnServer) {
+                                setRentersArray(rentersOnServer)
+                                setOpen(false)
+                                forceReload()
+                            })
+                                // getNewRental(newRentalServerObj)
+                                // setForceTrigger(!forceTrigger)
+                            })
+                
+                // setRentersArray([...rentersArray, newRenterObj])
                 // console.log(newRenterObj)
-                // fetch("http://localhost:9292/rentals", {
-                    //     method: "POST",
-                    //     headers: { "content-type": "application/json" },
-                    //     body: JSON.stringify(newRental)
-                    // })
-                    //     .then(resp => resp.json())
-                    //     .then(function(newRentalServerObj) {
-                        //         getNewRental(newRentalServerObj)
-                        //         // setForceTrigger(!forceTrigger)
-                        //     })
             })
-            console.log(rentersArray)
+            console.log(`${renter} added to sever.`)
             // newRental.renter_id = 1321
             // console.log(`${renter} posted to server.`)
         } else {
             console.log("Existing renter found.")
-            console.log(rentersArray)
+            // console.log(rentersArray)
             // console.log(`newRental.renter_id set to ${foundRenter.id}`)
-            // newRental.renter_id = foundRenter.id
-            // fetch("http://localhost:9292/rentals", {
-            //         method: "POST",
-            //         headers: { "content-type": "application/json" },
-            //         body: JSON.stringify(newRental)
-            //     })
-            //         .then(resp => resp.json())
-            //         .then(function(newRentalServerObj) {
-            //             getNewRental(newRentalServerObj)
-            //             setForceTrigger(!forceTrigger)
-            //         })
+            newRental.renter_id = foundRenter.id
+            fetch("http://localhost:9292/rentals", {
+                    method: "POST",
+                    headers: { "content-type": "application/json" },
+                    body: JSON.stringify(newRental)
+                })
+                    .then(resp => resp.json())
+                    .then(function(newRentalServerObj) {
+                        // getNewRental(newRentalServerObj)
+                        // setForceTrigger(!forceTrigger)
+                        fetch("http://localhost:9292/renters")
+                            .then(res => res.json())
+                            .then(function(rentersOnServer) {
+                                setRentersArray(rentersOnServer)
+                                setOpen(false)
+                                forceReload()
+                            })
+                    })
         }
 
     }
