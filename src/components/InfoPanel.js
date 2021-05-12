@@ -1,7 +1,15 @@
-function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr }) {
+import {Button} from 'semantic-ui-react';
+import { useHistory } from "react-router";
+import CheckOut from "./CheckOut";
+
+function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id }) {
+    const history = useHistory()
 
     function average(array) {
-        let ratingsArr = array.map(function(rental) {
+        let filteredArr = array.filter(function(rental) {
+            return rental.rating !== null
+        })
+        let ratingsArr = filteredArr.map(function(rental) {
             return rental.rating
         })
         let avgRating = (array) => array.reduce((a, b) => a + b) / array.length;
@@ -18,6 +26,19 @@ function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr }) {
         }
     }
 
+    function handleDelete() {
+        // Turn on after backend Delete handler is built
+        // fetch(`http://localhost:9292/decks/${id}`, {
+        //     method: "DELETE"
+        // })
+        //     .then(resp => resp.json())
+        //     .then(function(deletedDeckObj) {
+        //          history.push("/decks")
+        //     })
+        console.log(`Deck ${id} deleted.`)
+        history.push("/decks")
+    }
+
     return (
             <div className="info-container">
                 <img src={imgUrl} alt="commander" style={{height: "400px"}}/>
@@ -30,8 +51,8 @@ function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr }) {
                     <div className="deck-desc">
                         <p>{bio}</p>
                     </div>
-                    {checkedOut ? <button>Check In</button> : <button>Check Out</button>}
-                    <button>Delete Deck</button>
+                    {checkedOut ? <button>Check In</button> : <CheckOut />}
+                    <Button onClick={handleDelete}>Delete Deck</Button>
                 </div>
             </div>
     )

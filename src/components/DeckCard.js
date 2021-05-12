@@ -3,7 +3,10 @@ import {Link} from "react-router-dom"
 function DeckCard({ id, deckName, imgUrl, checkedOut, rentalsArr }) {
 
     function average(array) {
-        let ratingsArr = array.map(function(rental) {
+        let filteredArr = array.filter(function(rental) {
+            return rental.rating !== null
+        })
+        let ratingsArr = filteredArr.map(function(rental) {
             return rental.rating
         })
         let avgRating = (array) => array.reduce((a, b) => a + b) / array.length;
