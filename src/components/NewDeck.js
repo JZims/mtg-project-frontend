@@ -88,10 +88,10 @@ function NewDeck({setNewDeck}) {
             newDeckObj.img_url = scryfallInfo.image_url
             newDeckObj.commander_id = scryfallInfo.commander_id
 
-            handleDeckCreation()
+
+            setTimeout(handleDeckCreation, 3000)
             
         })
-
     }
 
     function handleDeckCreation(){
@@ -107,7 +107,8 @@ function NewDeck({setNewDeck}) {
                 .then(function(returnedDeckObj) {
                     setNewDeck(returnedDeckObj)
                 })
-    }
+
+}
 
 
     return (

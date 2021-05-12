@@ -15,6 +15,7 @@ function AllDecks({filteredDeck, newDeck, forceTrigger }) {
             console.log("array refreshed")
     }, [newDeck])
 
+
     // const arrayWithNewDeck = [...decksArray, newDeck]
     
     const filteredFromDelete = decksArray.filter(deck => deck.id !== filteredDeck)
