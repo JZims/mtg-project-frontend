@@ -1,7 +1,7 @@
 import DeckCard from "./DeckCard";
 import {useState, useEffect} from "react"
 
-function AllDecks({filteredDeck}) {
+function AllDecks({filteredDeck, newDeck, forceTrigger }) {
     const [decksArray, setDecksArray] = useState([])
     
 
@@ -13,10 +13,11 @@ function AllDecks({filteredDeck}) {
                 setDecksArray(deckServerData)
             })
             console.log("array refreshed")
-    }, [])
+    }, [newDeck])
 
+    // const arrayWithNewDeck = [...decksArray, newDeck]
+    
     const filteredFromDelete = decksArray.filter(deck => deck.id !== filteredDeck)
-
 
     const deckCardArray = filteredFromDelete.map(function(deck) {
         return <DeckCard 
@@ -26,6 +27,7 @@ function AllDecks({filteredDeck}) {
                 imgUrl={deck.img_url}
                 checkedOut={deck.checked_out}
                 rentalsArr={deck.rentals}
+                owner={deck.owner.name}
         />
     })
 

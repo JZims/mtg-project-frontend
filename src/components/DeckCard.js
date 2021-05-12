@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom"
 
-function DeckCard({ id, deckName, imgUrl, checkedOut, rentalsArr }) {
+function DeckCard({ id, deckName, imgUrl, checkedOut, rentalsArr, owner }) {
 
     function average(array) {
         let filteredArr = array.filter(function(rental) {
@@ -30,8 +30,8 @@ function DeckCard({ id, deckName, imgUrl, checkedOut, rentalsArr }) {
                 <img src={imgUrl} alt="commander" style={{height: "200px"}}/>
                 <div className="card-info">
                     <h2>{deckName}</h2>
-                    <h3>Owner Name</h3>
-                    { rentalsArr === [] ? <p>No reviews yet.</p> : <p>{average(rentalsArr)}</p>}
+                    <h3>{owner}</h3>
+                    { rentalsArr.length === 0 ? <p>No reviews yet.</p> : <p>{average(rentalsArr)}</p>}
                     {checkedOut ? <p id="unavail">Currently Unavailable</p> : <p id="avail">Available to Rent!</p>}
                 </div>
             </div>

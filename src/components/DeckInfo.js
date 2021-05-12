@@ -3,7 +3,7 @@ import ReviewCard from "./ReviewCard"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-function DeckInfo({setFilteredDeck}) {
+function DeckInfo({setFilteredDeck, setForceTrigger, forceTrigger}) {
     const [deckData, setDeckData] = useState({})
     const [rentalsArray, setRentalsArray] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
@@ -19,6 +19,10 @@ function DeckInfo({setFilteredDeck}) {
                 setIsLoaded(true)
             })
     }, [params.id])
+
+    // function getNewRental(newRentalServerObj) {
+    //     setRentalsArray(...rentalsArray, newRentalServerObj)
+    // }
 
     if (isLoaded) {
 
@@ -40,6 +44,10 @@ function DeckInfo({setFilteredDeck}) {
                        rentalsArr={rentalsArray}
                        id={deckData.id}
                        setFilteredDeck={setFilteredDeck}
+                       owner={deckData.owner.name}
+                       setForceTrigger={setForceTrigger}
+                       forceTrigger={forceTrigger}
+                    //    getNewRental={getNewRental}
                        
             />
             <h2>Player Reviews ({rentalsArray.length})</h2>

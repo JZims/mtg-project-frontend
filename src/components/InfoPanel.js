@@ -2,7 +2,7 @@ import {Button} from 'semantic-ui-react';
 import { useHistory } from "react-router";
 import CheckOut from "./CheckOut";
 
-function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id, setFilteredDeck}) {
+function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id, setFilteredDeck, owner, setForceTrigger, forceTrigger, getNewRental}) {
     const history = useHistory()
 
     function average(array) {
@@ -36,8 +36,8 @@ function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id, set
                 setFilteredDeck(deletedDeckObj.id)
                  history.push("/decks")
             })
-        console.log(`Deck ${id} deleted.`)
-        history.push("/decks")
+        // console.log(`Deck ${id} deleted.`)
+        // history.push("/decks")
         
     }
 
@@ -46,14 +46,14 @@ function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id, set
                 <img src={imgUrl} alt="commander" style={{height: "400px"}}/>
                 <div className="info-box">
                     <h2>{name}</h2>
-                    <h3>Owner Name</h3>
+                    <h3>{owner}</h3>
                     {/* <strong>Average Rating:</strong> */}
-                    {rentalsArr === [] ? <p>No reviews yet.</p> : <p>{average(rentalsArr)}</p>}
+                    {rentalsArr.length === 0 ? <p>No reviews yet.</p> : <p>{average(rentalsArr)}</p>}
                     <p><a href={listUrl} target="blank">View Decklist</a></p>
                     <div className="deck-desc">
                         <p>{bio}</p>
                     </div>
-                    {checkedOut ? <button>Check In</button> : <CheckOut />}
+                    {checkedOut ? <button>Check In</button> : <CheckOut setForceTrigger={setForceTrigger} forceTrigger={forceTrigger} id={id} getNewRental={getNewRental}/>}
                     <Button onClick={handleDelete}>Delete Deck</Button>
                 </div>
             </div>
