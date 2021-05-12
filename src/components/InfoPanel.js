@@ -2,7 +2,7 @@ import {Button} from 'semantic-ui-react';
 import { useHistory } from "react-router";
 import CheckOut from "./CheckOut";
 
-function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id }) {
+function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id, setFilteredDeck}) {
     const history = useHistory()
 
     function average(array) {
@@ -27,16 +27,18 @@ function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id }) {
     }
 
     function handleDelete() {
-        // Turn on after backend Delete handler is built
-        // fetch(`http://localhost:9292/decks/${id}`, {
-        //     method: "DELETE"
-        // })
-        //     .then(resp => resp.json())
-        //     .then(function(deletedDeckObj) {
-        //          history.push("/decks")
-        //     })
+    
+        fetch(`http://localhost:9292/decks/${id}`, {
+            method: "DELETE"
+        })
+            .then(resp => resp.json())
+            .then(function(deletedDeckObj) {
+                setFilteredDeck(deletedDeckObj.id)
+                 history.push("/decks")
+            })
         console.log(`Deck ${id} deleted.`)
         history.push("/decks")
+        
     }
 
     return (

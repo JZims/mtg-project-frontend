@@ -3,13 +3,13 @@ import ReviewCard from "./ReviewCard"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-function DeckInfo() {
+function DeckInfo({setFilteredDeck}) {
     const [deckData, setDeckData] = useState({})
     const [rentalsArray, setRentalsArray] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
     const params = useParams()
     // console.log (params)
-
+    
     useEffect(() => {
         fetch(`http://localhost:9292/decks/${params.id}`)
             .then(resp => resp.json())
@@ -29,7 +29,7 @@ function DeckInfo() {
                         name={rental.renter.name}
             />
         })
-
+    
         return (
             <div className="page" id="deck-info">
             <InfoPanel name={deckData.name}
@@ -39,6 +39,8 @@ function DeckInfo() {
                        checkedOut={deckData.checked_out}
                        rentalsArr={rentalsArray}
                        id={deckData.id}
+                       setFilteredDeck={setFilteredDeck}
+                       
             />
             <h2>Player Reviews ({rentalsArray.length})</h2>
             <div className="review-card-container">

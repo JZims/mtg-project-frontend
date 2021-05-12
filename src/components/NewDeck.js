@@ -15,7 +15,7 @@ function NewDeck() {
             setOwnersArray(ownersOnServer)
         })
     },[])
-    console.log(ownersArray)
+    
 
 
     const newDeckObj = {
