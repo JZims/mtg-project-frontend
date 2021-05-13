@@ -1,6 +1,7 @@
 import {Button} from 'semantic-ui-react';
 import { useHistory } from "react-router";
 import CheckOut from "./CheckOut";
+import CheckIn from './CheckIn';
 
 function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id, setFilteredDeck, owner, forceReload}) {
     const history = useHistory()
@@ -9,20 +10,22 @@ function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id, set
         let filteredArr = array.filter(function(rental) {
             return rental.rating !== null
         })
-        let ratingsArr = filteredArr.map(function(rental) {
-            return rental.rating
-        })
-        let avgRating = (array) => array.reduce((a, b) => a + b) / array.length;
-        if (avgRating(ratingsArr) <= 1) {
-            return "⭐"
-        } else if (avgRating(ratingsArr) > 1 && avgRating(ratingsArr) <= 2) {
-            return "⭐⭐"
-        } else if (avgRating(ratingsArr) > 2 && avgRating(ratingsArr) <= 3) {
-            return "⭐⭐⭐"
-        } else if (avgRating(ratingsArr) > 3 && avgRating(ratingsArr) <= 4) {
-            return "⭐⭐⭐⭐"
-        } else {
-            return "⭐⭐⭐⭐⭐"
+        if (filteredArr.length !== 0) {
+            let ratingsArr = filteredArr.map(function(rental) {
+                return rental.rating
+            })
+            let avgRating = (array) => array.reduce((a, b) => a + b) / array.length;
+            if (avgRating(ratingsArr) <= 1) {
+                return "⭐"
+            } else if (avgRating(ratingsArr) > 1 && avgRating(ratingsArr) <= 2) {
+                return "⭐⭐"
+            } else if (avgRating(ratingsArr) > 2 && avgRating(ratingsArr) <= 3) {
+                return "⭐⭐⭐"
+            } else if (avgRating(ratingsArr) > 3 && avgRating(ratingsArr) <= 4) {
+                return "⭐⭐⭐⭐"
+            } else {
+                return "⭐⭐⭐⭐⭐"
+            }
         }
     }
 
@@ -53,7 +56,7 @@ function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id, set
                     <div className="deck-desc">
                         <p>{bio}</p>
                     </div>
-                    {checkedOut ? <button>Check In</button> : <CheckOut id={id} forceReload={forceReload}/>}
+                    {checkedOut ? <CheckIn id={id }forceReload={forceReload}/> : <CheckOut id={id} forceReload={forceReload}/>}
                     <Button onClick={handleDelete}>Delete Deck</Button>
                 </div>
             </div>

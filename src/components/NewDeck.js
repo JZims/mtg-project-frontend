@@ -1,4 +1,5 @@
 import {useEffect,useState} from 'react'
+import { useHistory } from "react-router";
 
 function NewDeck({setNewDeck}) {
     const [newDeckName, setNewDeckName] = useState("")
@@ -7,6 +8,7 @@ function NewDeck({setNewDeck}) {
     const [newDeckOwner, setNewDeckOwner] = useState("")
     const [newDeckDescription, setNewDeckDescription] = useState("")
     const [ownersArray, setOwnersArray] = useState([])
+    const history = useHistory()
     // const [scryfallFetchSuccessful, setScryfallFetchSuccessful] = useState(false)
 
     useEffect(() =>{
@@ -106,6 +108,7 @@ function NewDeck({setNewDeck}) {
                 .then(resp => resp.json())
                 .then(function(returnedDeckObj) {
                     setNewDeck(returnedDeckObj)
+                    history.push("/decks")
                 })
 
 }
@@ -115,15 +118,15 @@ function NewDeck({setNewDeck}) {
         <div className="page" id="new-deck">
             <h2>List a New Deck</h2>
             <form className="form" id="new-deck">
-                <input name="deck_name" placeholder="Deck Name" onChange={e => setNewDeckName(e.target.value)}/>
+                <input name="deck_name" placeholder="Deck Name" maxLength="45" required onChange={e => setNewDeckName(e.target.value)}/>
                 <br/>
-                <input name="commander" placeholder="Commander" onChange={e => setNewDeckCommander(e.target.value)}/>
+                <input name="commander" placeholder="Commander" required onChange={e => setNewDeckCommander(e.target.value)}/>
                 <br/>
-                <input name="decklist_url" placeholder="Decklist URL" onChange={e => setNewDecklistLink(e.target.value)}/>
+                <input name="decklist_url" placeholder="Decklist URL" required onChange={e => setNewDecklistLink(e.target.value)}/>
                 <br/>
-                <input name="owner" placeholder="Owner" onChange={e => setNewDeckOwner(e.target.value)}/>
+                <input name="owner" placeholder="Owner" required onChange={e => setNewDeckOwner(e.target.value)}/>
                 <br/>
-                <textarea name="description" placeholder="Description" onChange={e => setNewDeckDescription(e.target.value)}/>
+                <textarea name="description" placeholder="Description" required onChange={e => setNewDeckDescription(e.target.value)}/>
                 <br/>
                 <input type="submit" value="Submit" onClick={handleNewDeckSubmit}/>
             </form>

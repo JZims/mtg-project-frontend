@@ -1,10 +1,43 @@
-import { Button, Modal, Form, Label, Header, TextArea } from 'semantic-ui-react'
-import { useState, useEffect } from 'react'
-// import { useHistory } from "react-router";
+import { Button, Modal, Form, Header, TextArea, Select } from 'semantic-ui-react'
+import { useState } from 'react'
 
-function CheckIn() {
+
+function CheckIn({id, forceReload}) {
     const [open, setOpen] = useState(false)
+    const [review, setReview] = useState("")
+    const [rating, setRating] = useState(0)
     
+    const ratingOptions = [
+        {key: "⭐", value: 1, text: "⭐"},
+        {key: "⭐⭐", value: 2, text: "⭐⭐"},
+        {key: "⭐⭐⭐", value: 3, text: "⭐⭐⭐"},
+        {key: "⭐⭐⭐⭐", value: 4, text: "⭐⭐⭐⭐"},
+        {key: "⭐⭐⭐⭐⭐", value: 5, text: "⭐⭐⭐⭐⭐"}
+    ]
+
+    function handleSubmit() {
+        // console.log(`Submitted review: ${review}`)
+        // console.log(`Submitted rating: ${rating}`)
+        let reviewInfo = {
+            review: review,
+            rating: rating
+        }
+
+        fetch(`http://localhost:9292/decks/${id}`, {
+            method: "PATCH",
+            headers: {"content-type": "application/json"},
+            body: JSON.stringify(reviewInfo)
+        })
+            .then(resp => resp.json())
+            .then(function(updatedRental) {
+                setOpen(false)
+                forceReload()
+            })
+    }
+
+    function handleOnChange(e, data) {
+        setRating(data.value)
+    }
 
     return (
         <Modal
@@ -18,18 +51,10 @@ function CheckIn() {
             <Header>Review Deck</Header>
             <Form onSubmit={handleSubmit}>
                 <Form.Field>
-                    <Label>Renter</Label>
-                    <input placeholder="Who's renting this deck?"
-                           name="renter"
-                           value={renter}
-                           onChange={e => setRenter(e.target.value)} />
+                    <TextArea placeholder="Tell us how the deck played!" required value={review} onChange={e => setReview(e.target.value)}/>
                 </Form.Field>
                 <Form.Field>
-                <Label>Rental Length</Label>
-                    <input placeholder="How many days?"
-                           name="length"
-                           value={length}
-                           onChange={e => setLength(e.target.value)} />
+                    <Select placeholder="Rate this deck" required options={ratingOptions} onChange={handleOnChange}/>
                 </Form.Field>
                 <Button type='submit'>Submit</Button>
             </Form>

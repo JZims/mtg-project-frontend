@@ -32,7 +32,11 @@ function DeckInfo({setFilteredDeck}) {
 
     if (isLoaded) {
 
-        const reviewCardArray = rentalsArray.map(function(rental) {
+        const nullReviewsFiltered = rentalsArray.filter(function(rental) {
+            return rental.rating !== null
+        })
+
+        const reviewCardArray = nullReviewsFiltered.map(function(rental) {
             return <ReviewCard key={rental.id}
                         review={rental.review}
                         rating={rental.rating}
@@ -57,7 +61,7 @@ function DeckInfo({setFilteredDeck}) {
                     //    getNewRental={getNewRental}
                        
             />
-            <h2>Player Reviews ({rentalsArray.length})</h2>
+            <h2>Player Reviews ({nullReviewsFiltered.length})</h2>
             <div className="review-card-container">
                 {reviewCardArray}
             </div>
