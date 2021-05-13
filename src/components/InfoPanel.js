@@ -43,19 +43,21 @@ function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id, set
         // history.push("/decks")
         
     }
-
+    // console.log(rentalsArr[-1])
     return (
             <div className="info-container">
                 <a href={`https://scryfall.com/card/${scryfallUrlTag}`} target="blank" title="View on Scryfall"><img src={imgUrl} alt="commander" style={{height: "412px"}}/></a>
                 <div className="info-box">
                     <h2>{name}</h2>
-                    <span>deck by</span>
+                    <span>a deck by</span>
                     <h3 className="owner">{owner}</h3>
                     {rentalsArr.length === 0 ? <p>No reviews yet.</p> : <p><span className="stars">{average(rentalsArr)}</span></p>}
                     <p className="deck-url"><a href={listUrl} target="blank">View Decklist</a></p>
                     <div className="deck-desc">
                         <p>{bio}</p>
                     </div>
+                    {checkedOut ? <span>Checked out to <strong>{rentalsArr[rentalsArr.length - 1].renter.name}</strong></span> : null}
+                    <br/>
                     {checkedOut ? <CheckIn id={id}forceReload={forceReload}/> : <CheckOut id={id} forceReload={forceReload}/>}
                     <Button className="info-panel-buttons" onClick={handleDelete}>Delete Deck</Button>
                 </div>

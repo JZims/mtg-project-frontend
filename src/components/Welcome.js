@@ -19,7 +19,7 @@ function Welcome() {
                 <img src="https://i.imgur.com/USMGLoV.png" alt="logo" style={{ height: "500px" }}/>
                 <div className="quotes-block" id="quotes-block-2">
                     <div className="quote">
-                        "It works. Not great, but it works."
+                        "It works. Not well, but it works."
                         <br/>
                         <strong>CNET</strong>
                     </div>

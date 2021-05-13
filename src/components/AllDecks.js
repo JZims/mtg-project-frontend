@@ -4,7 +4,7 @@ import {useState, useEffect} from "react"
 function AllDecks({filteredDeck, newDeck, forceTrigger }) {
     const [decksArray, setDecksArray] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
-    
+    const [selectValue, setSelectValue] = useState("All")
 
     // Initial fetch to server for decks
     useEffect(() => {
@@ -17,12 +17,24 @@ function AllDecks({filteredDeck, newDeck, forceTrigger }) {
             console.log("array refreshed")
     }, [newDeck])
 
+    function handleOnChange(e) {
+        setSelectValue(e.target.value)
+    }
 
+    console.log(selectValue)
     
     if (isLoaded) {
         const filteredFromDelete = decksArray.filter(deck => deck.id !== filteredDeck)
+        let filteredDecks
+        if (selectValue === "Available") {
+            filteredDecks = filteredFromDelete.filter(function(deck) {
+                return deck.checked_out === false
+            })
+        } else {
+            filteredDecks = [...filteredFromDelete]
+        }
         // console.log(filteredFromDelete)
-        const deckCardArray = filteredFromDelete.map(function(deck) {
+        const deckCardArray = filteredDecks.map(function(deck) {
             return <DeckCard 
                     key={deck.id}
                     id={deck.id}
@@ -36,7 +48,7 @@ function AllDecks({filteredDeck, newDeck, forceTrigger }) {
 
         return (
             <div className="page" id="all-decks">
-                <select name="filter" id="deck-filter">
+                <select name="filter" id="deck-filter" onChange={e => handleOnChange(e)}>
                     <option value="All">All Decks</option>
                     <option value="Available">Available to Rent</option>
                 </select>
