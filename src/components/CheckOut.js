@@ -2,7 +2,7 @@ import { Button, Modal, Form, Label } from 'semantic-ui-react'
 import { useState, useEffect } from 'react'
 // import { useHistory } from "react-router";
 
-function CheckOut({id, forceReload}) {
+function CheckOut({id, forceReload, renterName}) {
     const [open, setOpen] = useState(false)
     const [renter, setRenter] = useState("")
     const [length, setLength] = useState("")
@@ -47,6 +47,7 @@ function CheckOut({id, forceReload}) {
             .then(resp => resp.json())
             .then(function(newRenterObj) {
                 newRental.renter_id = newRenterObj.id
+                renterName(newRenterObj)
                 fetch("http://localhost:9292/rentals", {
                         method: "POST",
                         headers: { "content-type": "application/json" },
@@ -76,6 +77,7 @@ function CheckOut({id, forceReload}) {
             // console.log(rentersArray)
             // console.log(`newRental.renter_id set to ${foundRenter.id}`)
             newRental.renter_id = foundRenter.id
+            renterName(foundRenter)
             fetch("http://localhost:9292/rentals", {
                     method: "POST",
                     headers: { "content-type": "application/json" },

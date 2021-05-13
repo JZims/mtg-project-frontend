@@ -44,6 +44,19 @@ function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id, set
         // history.push("/decks")
         
     }
+
+    function renterName(renter) {
+        return `${renter.name}`
+    }
+
+    function renterNameDisplayLogic(name) {
+        if (rentalsArr.length === 0) {
+            return name
+        } else {
+            return rentalsArr[rentalsArr.length - 1].renter.name
+        }
+    }
+
     // console.log(rentalsArr[-1])
     return (
             <div className="info-container">
@@ -57,9 +70,9 @@ function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id, set
                     <div className="deck-desc">
                         <p>{bio}</p>
                     </div>
-                    {checkedOut ? <span>Checked out to <strong>{rentalsArr[rentalsArr.length - 1].renter.name}</strong></span> : null}
+                    {checkedOut ? <span>Checked out to <strong>{renterNameDisplayLogic(renterName)}</strong></span> : null}
                     <br/>
-                    {checkedOut ? <CheckIn id={id}forceReload={forceReload}/> : <CheckOut id={id} forceReload={forceReload}/>}
+                    {checkedOut ? <CheckIn id={id}forceReload={forceReload}/> : <CheckOut id={id} forceReload={forceReload} renterName={renterName}/>}
                     <Button className="info-panel-buttons" onClick={handleDelete}>Delete Deck</Button>
                 </div>
             </div>
