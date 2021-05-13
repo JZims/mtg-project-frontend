@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
+import DeckCardMini from "./DeckCardMini"
 // import DeckCard from "./DeckCard"
 
 function UserInfo() {
@@ -18,17 +19,15 @@ function UserInfo() {
     
     if (isLoaded) {
         const deckCardsArray = userData.decks.map(function(deck) {
-            // return <DeckCard 
-            //             key={deck.id}
-            //             id={deck.id}
-            //             deckName={deck.name}
-            //             imgUrl={deck.img_url}
-            //             checkedOut={deck.checked_out}
-            //             rentalsArr={deck.rentals}
-            //             owner={deck.owner.name}
-            //     />
+            return <DeckCardMini
+                        key={deck.id}
+                        id={deck.id}
+                        deckName={deck.name}
+                        imgUrl={deck.img_url}
+                        checkedOut={deck.checked_out}
+                />
 
-            return <Link to={`/deckinfo/${deck.id}`} className="deck-link">{deck.name}</Link>
+            // return <Link to={`/deckinfo/${deck.id}`} className="deck-link">{deck.name}</Link>
         })
 
         return (

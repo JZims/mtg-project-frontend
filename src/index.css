@@ -239,7 +239,9 @@ div#tag .deck-link:hover {
 
 #deck-link-collection {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-bottom: 75px;
 }
 
 input:focus,

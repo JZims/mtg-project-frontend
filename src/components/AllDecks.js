@@ -48,10 +48,18 @@ function AllDecks({filteredDeck, newDeck, forceTrigger }) {
 
         return (
             <div className="page" id="all-decks">
-                <select name="filter" id="deck-filter" onChange={e => handleOnChange(e)}>
+                <select name="filter" className="deck-filter" onChange={e => handleOnChange(e)}>
                     <option value="All">All Decks</option>
                     <option value="Available">Available to Rent</option>
                 </select>
+                {/* <select name="rating" className="deck-filter" onChange={e => handleOnChange(e)}>
+                    <option value="All">Filter by Rating</option>
+                    <option value="5">⭐⭐⭐⭐⭐</option>
+                    <option value="5">⭐⭐⭐⭐</option>
+                    <option value="5">⭐⭐⭐</option>
+                    <option value="5">⭐⭐</option>
+                    <option value="5">⭐</option>
+                </select> */}
                 <div id="all-decks-list">
                     {deckCardArray}
                 </div>
