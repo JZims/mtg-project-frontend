@@ -1,5 +1,6 @@
 import {useEffect,useState} from 'react'
 import { useHistory } from "react-router";
+import { Form, TextArea, Button } from 'semantic-ui-react'
 
 function NewDeck({setNewDeck}) {
     const [newDeckName, setNewDeckName] = useState("")
@@ -8,6 +9,7 @@ function NewDeck({setNewDeck}) {
     const [newDeckOwner, setNewDeckOwner] = useState("")
     const [newDeckDescription, setNewDeckDescription] = useState("")
     const [ownersArray, setOwnersArray] = useState([])
+    const [wasClicked, setWasClicked] = useState(false)
     const history = useHistory()
     // const [scryfallFetchSuccessful, setScryfallFetchSuccessful] = useState(false)
 
@@ -33,6 +35,7 @@ function NewDeck({setNewDeck}) {
 
     function handleNewDeckSubmit(e){
         e.preventDefault()
+        setWasClicked(true)
 
         let splitCommander
 
@@ -115,21 +118,26 @@ function NewDeck({setNewDeck}) {
 
 
     return (
-        <div className="page" id="new-deck">
+        <div className="page" id="new-deck-container">
             <h2>List a New Deck</h2>
-            <form className="form" id="new-deck">
-                <input name="deck_name" placeholder="Deck Name" maxLength="45" required onChange={e => setNewDeckName(e.target.value)}/>
-                <br/>
-                <input name="commander" placeholder="Commander" required onChange={e => setNewDeckCommander(e.target.value)}/>
-                <br/>
-                <input name="decklist_url" placeholder="Decklist URL" required onChange={e => setNewDecklistLink(e.target.value)}/>
-                <br/>
-                <input name="owner" placeholder="Owner" required onChange={e => setNewDeckOwner(e.target.value)}/>
-                <br/>
-                <textarea name="description" placeholder="Description" required onChange={e => setNewDeckDescription(e.target.value)}/>
-                <br/>
-                <input type="submit" value="Submit" onClick={handleNewDeckSubmit}/>
-            </form>
+            <Form className="form" id="new-deck">
+                <Form.Field>
+                    <input name="deck_name" placeholder="Deck Name" maxLength="45" required onChange={e => setNewDeckName(e.target.value)}/>
+                </Form.Field>
+                <Form.Field>
+                    <input name="commander" placeholder="Commander" required onChange={e => setNewDeckCommander(e.target.value)}/>
+                </Form.Field>
+                <Form.Field>
+                    <input name="decklist_url" placeholder="Decklist URL" required onChange={e => setNewDecklistLink(e.target.value)}/>
+                </Form.Field>
+                <Form.Field>
+                    <input name="owner" placeholder="Owner" required onChange={e => setNewDeckOwner(e.target.value)}/>
+                </Form.Field>
+                <Form.Field>
+                    <TextArea name="description" placeholder="Description" required onChange={e => setNewDeckDescription(e.target.value)}/>
+                </Form.Field>
+                { wasClicked ? <Button loading>Submit</Button> : <Button type='submit' onClick={handleNewDeckSubmit}>Submit</Button>}
+            </Form>
             
         </div>
     )

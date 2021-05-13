@@ -1,5 +1,6 @@
 import {Button} from 'semantic-ui-react';
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom"
 import CheckOut from "./CheckOut";
 import CheckIn from './CheckIn';
 
@@ -50,7 +51,7 @@ function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id, set
                 <div className="info-box">
                     <h2>{name}</h2>
                     <span>a deck by</span>
-                    <h3 className="owner">{owner}</h3>
+                    <Link to={`/user/${owner.id}`}><h3 className="owner">{owner.name}</h3></Link>
                     {rentalsArr.length === 0 ? <p>No reviews yet.</p> : <p><span className="stars">{average(rentalsArr)}</span></p>}
                     <p className="deck-url"><a href={listUrl} target="blank">View Decklist</a></p>
                     <div className="deck-desc">

@@ -11,7 +11,7 @@ function Welcome() {
                     </div>
                         <br/>
                     <div className="quote">
-                        "I think this website just installed AOL on my computer."
+                        "Pretty sure this website still runs on AOL."
                         <br/>
                         <strong>Forbes</strong>
                     </div>

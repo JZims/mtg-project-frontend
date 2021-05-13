@@ -54,7 +54,7 @@ function DeckInfo({setFilteredDeck}) {
                        rentalsArr={rentalsArray}
                        id={deckData.id}
                        setFilteredDeck={setFilteredDeck}
-                       owner={deckData.owner.name}
+                       owner={deckData.owner}
                        forceReload={forceReload}
                        scryfallUrlTag={deckData.commander_id}
                     //    setForceTrigger={setForceTrigger}

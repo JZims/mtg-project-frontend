@@ -46,6 +46,12 @@ code {
   background-color: rgb(237, 216, 188);
 }
 
+.header form input {
+  background-color: transparent;
+  border: none;
+  margin-top: 0px;
+}
+
 /* .header span {
   font-size: 40px;
   color: rgb(255, 245, 232);
@@ -120,6 +126,7 @@ code {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  padding-bottom: 75px;
 }
 
 .card-container {
@@ -215,6 +222,36 @@ div.ui.label {
 h2 span {
   color: rgb(240, 170, 79)
 }
+
+#new-deck-container {
+  margin: auto;
+  width: 40%
+}
+
+div#tag .deck-link {
+  color: rgb(240, 170, 79);
+  font-weight: bold;
+}
+
+div#tag .deck-link:hover {
+  color: rgb(196, 140, 67);
+}
+
+#deck-link-collection {
+  display: flex;
+  flex-direction: column;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+/* #search-users {
+  height: 10px;
+} */
 
 /* .info-box button {
   margin-bottom: 3px;

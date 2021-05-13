@@ -5,6 +5,7 @@ import AllDecks from "./AllDecks";
 import DeckInfo from "./DeckInfo";
 import Header from "./Header";
 import NewDeck from "./NewDeck";
+import UserInfo from './UserInfo';
 import Welcome from "./Welcome";
 
 function App() {
@@ -38,6 +39,9 @@ function App() {
                     newDeck={newDeck}
                     // forceTrigger={forceTrigger}
                     />
+        </Route>
+        <Route exact path="/user/:id">
+          <UserInfo />
         </Route>
       </Switch>
     </div>
