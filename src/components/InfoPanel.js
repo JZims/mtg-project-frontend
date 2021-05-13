@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import CheckOut from "./CheckOut";
 import CheckIn from './CheckIn';
 
-function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id, setFilteredDeck, owner, forceReload}) {
+function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id, setFilteredDeck, owner, forceReload, scryfallUrlTag}) {
     const history = useHistory()
 
     function average(array) {
@@ -46,18 +46,18 @@ function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id, set
 
     return (
             <div className="info-container">
-                <img src={imgUrl} alt="commander" style={{height: "400px"}}/>
+                <a href={`https://scryfall.com/card/${scryfallUrlTag}`} target="blank" title="View on Scryfall"><img src={imgUrl} alt="commander" style={{height: "412px"}}/></a>
                 <div className="info-box">
                     <h2>{name}</h2>
-                    <h3>{owner}</h3>
-                    {/* <strong>Average Rating:</strong> */}
-                    {rentalsArr.length === 0 ? <p>No reviews yet.</p> : <p>{average(rentalsArr)}</p>}
-                    <p><a href={listUrl} target="blank">View Decklist</a></p>
+                    <span>deck by</span>
+                    <h3 className="owner">{owner}</h3>
+                    {rentalsArr.length === 0 ? <p>No reviews yet.</p> : <p><span className="stars">{average(rentalsArr)}</span></p>}
+                    <p className="deck-url"><a href={listUrl} target="blank">View Decklist</a></p>
                     <div className="deck-desc">
                         <p>{bio}</p>
                     </div>
-                    {checkedOut ? <CheckIn id={id }forceReload={forceReload}/> : <CheckOut id={id} forceReload={forceReload}/>}
-                    <Button onClick={handleDelete}>Delete Deck</Button>
+                    {checkedOut ? <CheckIn id={id}forceReload={forceReload}/> : <CheckOut id={id} forceReload={forceReload}/>}
+                    <Button className="info-panel-buttons" onClick={handleDelete}>Delete Deck</Button>
                 </div>
             </div>
     )

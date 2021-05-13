@@ -58,7 +58,9 @@ code {
 
 .review-card-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  padding-bottom: 70px;
 }
 
 .info-container {
@@ -69,9 +71,23 @@ code {
 
 .info-box {
   border: solid;
+  border-width: 5px;
+  border-color: rgb(240, 170, 79);
+  background-color: rgb(255, 245, 232);
+  border-radius: 20px;
   width: 40%;
   margin-left: 30px;
   margin-right: 30px;
+  padding: 3px;
+  box-shadow: 10px 10px 8px #b1b1b1;
+}
+
+.info-box p a {
+  font-weight: bold;
+}
+
+.info-container img {
+  box-shadow: 10px 10px 8px #b1b1b1;
 }
 
 .deck-desc {
@@ -86,10 +102,18 @@ code {
 
 .review-container {
   width: 300px;
-  padding: 10px;
+  padding: 0px;
   margin: 10px;
-  border: solid;
-  border-width: 1px;
+  /* border: solid; */
+  /* border-width: 1px; */
+  background-color: rgb(242, 242, 242);
+  box-shadow: 10px 10px 8px #dedede;
+}
+
+.review-container h3 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: rgb(233, 197, 150);
 }
 
 #all-decks-list {
@@ -101,10 +125,25 @@ code {
 .card-container {
   display: flex;
   justify-content: center;
-  margin: 10px;
-  border: solid;
-  border-width: 2px;
+  /* margin: 10px; */
+  /* border: solid; */
+  /* border-width: 2px; */
   width: 400px;
+  /* border: solid; */
+  /* border-width: 5px; */
+  /* border-color: rgb(65, 65, 65); */
+  background-color: rgb(242, 242, 242);
+  /* border-radius: 30px; */
+  /* width: 40%; */
+  /* margin-left: 30px;
+  margin-right: 30px; */
+  padding: 10px;
+  margin: 15px;
+  box-shadow: 10px 10px 8px #b1b1b1;
+}
+
+.card-container:hover {
+  background-color: rgb(255, 245, 232);
 }
 
 .card-container img {
@@ -133,3 +172,54 @@ code {
 div.ui.label {
   background-color: transparent;
 }
+
+.owner {
+  margin-top: 0px;
+}
+
+#check-out {
+  background-color: rgb(240, 170, 79);
+}
+
+#check-out:hover {
+  background-color: rgb(215, 153, 73);
+}
+
+.stars {
+  text-shadow: 2px 2px 3px #00000074;
+}
+
+.review-content {
+  margin-top: 25px;
+  padding: 10px;
+}
+
+.loading {
+  margin-top: 200px;
+}
+
+#quotes-container {
+  display: flex;
+  justify-content: center;
+}
+
+.quotes-block {
+  width: 350px;
+}
+
+.quote {
+  margin-top: 130px;
+  font-size: 18px;
+}
+
+h2 span {
+  color: rgb(240, 170, 79)
+}
+
+/* .info-box button {
+  margin-bottom: 3px;
+} */
+
+/* .deck-url {
+  margin-bottom: 5px;
+} */

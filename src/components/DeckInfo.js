@@ -56,6 +56,7 @@ function DeckInfo({setFilteredDeck}) {
                        setFilteredDeck={setFilteredDeck}
                        owner={deckData.owner.name}
                        forceReload={forceReload}
+                       scryfallUrlTag={deckData.commander_id}
                     //    setForceTrigger={setForceTrigger}
                     //    forceTrigger={forceTrigger}
                     //    getNewRental={getNewRental}
@@ -68,7 +69,11 @@ function DeckInfo({setFilteredDeck}) {
         </div>
     )
 } else {
-    return null
+    return ( 
+        <div className="page">
+            <img src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg" alt="loading" style={{ height: "100px"}} className="loading"/>
+        </div> 
+    )
 }
 }
 

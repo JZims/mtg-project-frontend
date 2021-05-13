@@ -31,7 +31,7 @@ function DeckCard({ id, deckName, imgUrl, checkedOut, rentalsArr, owner }) {
                 <div className="card-info">
                     <h2>{deckName}</h2>
                     <h3>{owner}</h3>
-                    { rentalsArr.length === 0 ? <p>No reviews yet.</p> : <p>{average(rentalsArr)}</p>}
+                    { rentalsArr.length === 0 ? <p>No reviews yet.</p> : <p><span className="stars">{average(rentalsArr)}</span></p>}
                     {checkedOut ? <p id="unavail">Currently Unavailable</p> : <p id="avail">Available to Rent!</p>}
                 </div>
             </div>

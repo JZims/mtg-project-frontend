@@ -17,8 +17,8 @@ function ReviewCard({ review, rating, name}) {
     return (
         <div className="review-container">
                 <h3>{name}</h3>
-                <h4>{ratingInStars(rating)}</h4>
-                <p>{review}</p>
+                <p><span className="stars">{ratingInStars(rating)}</span></p>
+                <p className="review-content">{review}</p>
         </div>
     )
 }

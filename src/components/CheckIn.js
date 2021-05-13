@@ -6,6 +6,7 @@ function CheckIn({id, forceReload}) {
     const [open, setOpen] = useState(false)
     const [review, setReview] = useState("")
     const [rating, setRating] = useState(0)
+    const [wasClicked, setWasClicked] = useState(false)
     
     const ratingOptions = [
         {key: "⭐", value: 1, text: "⭐"},
@@ -18,6 +19,7 @@ function CheckIn({id, forceReload}) {
     function handleSubmit() {
         // console.log(`Submitted review: ${review}`)
         // console.log(`Submitted rating: ${rating}`)
+        setWasClicked(true)
         let reviewInfo = {
             review: review,
             rating: rating
@@ -44,7 +46,7 @@ function CheckIn({id, forceReload}) {
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
             open={open}
-            trigger={<Button>Check In</Button>}
+            trigger={<Button className="info-panel-buttons" id="check-in">Check In</Button>}
             className="modal"
         >
             <Modal.Header>Thanks for playing!</Modal.Header>
@@ -56,7 +58,7 @@ function CheckIn({id, forceReload}) {
                 <Form.Field>
                     <Select placeholder="Rate this deck" required options={ratingOptions} onChange={handleOnChange}/>
                 </Form.Field>
-                <Button type='submit'>Submit</Button>
+                { wasClicked ? <Button loading>Submit</Button> : <Button type='submit'>Submit</Button>}
             </Form>
         </Modal>
     )

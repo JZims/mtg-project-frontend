@@ -4,7 +4,7 @@ function Header() {
     return (
         <div className="header">
             <Link to="/">
-            <img src="https://i.imgur.com/USMGLoV.png" alt="logo" style={{ height: "100px" }}/> 
+            <img src="https://i.imgur.com/djniZvE.png" alt="logo" style={{ height: "100px" }}/> 
             </Link>
             <Link to="/decks" className="nav-link">Decks</Link>
             <Link to="/newdeck" className="nav-link">Add New Deck</Link>

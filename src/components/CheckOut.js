@@ -7,6 +7,7 @@ function CheckOut({id, forceReload}) {
     const [renter, setRenter] = useState("")
     const [length, setLength] = useState("")
     const [rentersArray, setRentersArray] = useState([])
+    const [wasClicked, setWasClicked] = useState(false)
     // const history = useHistory()
 
     useEffect(() =>{
@@ -14,12 +15,14 @@ function CheckOut({id, forceReload}) {
         .then(res => res.json())
         .then(function(rentersOnServer) {
             setRentersArray(rentersOnServer)
+            setWasClicked(false)
         })
     },[])
 
     // console.log(renter, length)
 
     function handleSubmit() {
+        setWasClicked(true)
         let newRental = {
             review: null,
             rating: null,
@@ -99,7 +102,7 @@ function CheckOut({id, forceReload}) {
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
             open={open}
-            trigger={<Button>Check Out</Button>}
+            trigger={<Button className="info-panel-buttons" id="check-out">Check Out</Button>}
             className="modal"
         >
             <Modal.Header>Check Out Deck</Modal.Header>
@@ -118,7 +121,7 @@ function CheckOut({id, forceReload}) {
                            value={length}
                            onChange={e => setLength(e.target.value)} />
                 </Form.Field>
-                <Button type='submit'>Submit</Button>
+                { wasClicked ? <Button loading>Submit</Button> : <Button type='submit'>Submit</Button>}
             </Form>
         </Modal>
     )
