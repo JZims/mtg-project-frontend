@@ -57,6 +57,16 @@ function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id, set
         }
     }
 
+    function checkNullStatus(rentalsArr) {
+        if (rentalsArr.length === 1 && rentalsArr[rentalsArr.length - 1].rating === null) {
+            return <p>No reviews yet.</p>
+        } else if (rentalsArr.length > 1 && rentalsArr[rentalsArr.length - 1].rating === null) {
+            return <p><span className="stars">{average(rentalsArr)}</span></p>
+        } else {
+            return <p><span className="stars">{average(rentalsArr)}</span></p>
+        }
+    }
+
     // console.log(rentalsArr[-1])
     return (
             <div className="info-container">
@@ -65,7 +75,7 @@ function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id, set
                     <h2>{name}</h2>
                     <span>a deck by</span>
                     <Link to={`/user/${owner.id}`}><h3 className="owner">{owner.name}</h3></Link>
-                    {rentalsArr.length === 0 ? <p>No reviews yet.</p> : <p><span className="stars">{average(rentalsArr)}</span></p>}
+                    {rentalsArr.length === 0 ? <p>No reviews yet.</p> : checkNullStatus(rentalsArr)}
                     <p className="deck-url"><a href={listUrl} target="blank">View Decklist</a></p>
                     <div className="deck-desc">
                         <p>{bio}</p>
