@@ -147,10 +147,15 @@ code {
   padding: 10px;
   margin: 15px;
   box-shadow: 10px 10px 8px #b1b1b1;
+  -webkit-transition: margin 0.5s ease-out;
+    -moz-transition: margin 0.5s ease-out;
+    -o-transition: margin 0.5s ease-out;
 }
 
 .card-container:hover {
   background-color: rgb(255, 245, 232);
+  cursor:pointer;
+    margin-top: 5px;
 }
 
 .card-container img {
