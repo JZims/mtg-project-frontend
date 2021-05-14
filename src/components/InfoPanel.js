@@ -72,7 +72,7 @@ function InfoPanel({ name, imgUrl, bio, listUrl, checkedOut, rentalsArr, id, set
                     </div>
                     {checkedOut ? <span>Checked out to <strong>{renterNameDisplayLogic(renterName)}</strong></span> : null}
                     <br/>
-                    {checkedOut ? <CheckIn id={id}forceReload={forceReload}/> : <CheckOut id={id} forceReload={forceReload} renterName={renterName}/>}
+                    {checkedOut ? <CheckIn id={id}forceReload={forceReload} rentalsArr={rentalsArr}/> : <CheckOut id={id} forceReload={forceReload} renterName={renterName}/>}
                     <Button className="info-panel-buttons" onClick={handleDelete}>Delete Deck</Button>
                 </div>
             </div>

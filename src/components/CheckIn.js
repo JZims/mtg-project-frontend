@@ -2,7 +2,7 @@ import { Button, Modal, Form, Header, TextArea, Select } from 'semantic-ui-react
 import { useState } from 'react'
 
 
-function CheckIn({id, forceReload}) {
+function CheckIn({id, forceReload, rentalsArr}) {
     const [open, setOpen] = useState(false)
     const [review, setReview] = useState("")
     const [rating, setRating] = useState(0)
@@ -50,6 +50,7 @@ function CheckIn({id, forceReload}) {
             className="modal"
         >
             <Modal.Header>Thanks for playing!</Modal.Header>
+            { rentalsArr.length === 0 ? null : <Header as='h3'>Total Due: ${(rentalsArr[rentalsArr.length - 1].rental_length) * 2}.00</Header> }
             <Header>Review Deck</Header>
             <Form onSubmit={handleSubmit}>
                 <Form.Field>
